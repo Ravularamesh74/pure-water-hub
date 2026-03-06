@@ -8,7 +8,7 @@ import StatusBadge from "@/components/StatusBadge";
 const recentOrders = [
   { id: "ORD-008", product: "20L Jar x5", date: "Mar 5, 2026", status: "out_for_delivery" as const, amount: "₹500" },
   { id: "ORD-007", product: "20L Jar x5", date: "Mar 1, 2026", status: "delivered" as const, amount: "₹500" },
-  { id: "ORD-006", product: "1L Bottle Pack x2", date: "Feb 25, 2026", status: "delivered" as const, amount: "₹960" },
+  { id: "ORD-006", product: "15L Jar x3", date: "Feb 25, 2026", status: "delivered" as const, amount: "₹255" },
 ];
 
 const CustomerPortal = () => {

@@ -9,9 +9,8 @@ import { toast } from "sonner";
 
 const products = [
   { id: "jar20", name: "20L Purified Jar", price: 99, unit: "per jar" },
-  { id: "bottle1l", name: "1L Bottle (Pack of 24)", price: 480, unit: "per pack" },
-  { id: "bottle500ml", name: "500ml Bottle (Pack of 48)", price: 720, unit: "per pack" },
-  { id: "tanker5k", name: "Bulk Tanker (5,000L)", price: 5000, unit: "per tanker" },
+  { id: "jar15", name: "15L Purified Jar", price: 85, unit: "per jar" },
+  { id: "jar10", name: "10L Purified Bottle", price: 65, unit: "per jar" },
 ];
 
 const OrderPage = () => {

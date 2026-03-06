@@ -1,20 +1,20 @@
-import { Droplets, Shield, Truck, Repeat, Zap, Phone, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Droplets, Shield, Truck, Repeat, Zap, Phone, ArrowRight, CheckCircle2, Award, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
-import heroImage from "@/assets/hero-water.jpg";
+import Footer from "@/components/Footer";
 
 const features = [
-  { icon: Shield, title: "7-Stage Purification", desc: "RO + UV + Ozone + Remineralization for WHO-compliant water quality" },
-  { icon: Truck, title: "Doorstep Delivery", desc: "Same-day delivery with GPS tracking and real-time updates" },
-  { icon: Repeat, title: "Flexible Subscriptions", desc: "Daily, weekly, or monthly plans with easy pause & modify" },
-  { icon: Zap, title: "IoT Monitored", desc: "Real-time TDS, pH, and quality monitoring at our plant 24/7" },
+  { icon: Shield, title: "Multi-Stage Purification", desc: "RO + UV + Carbon + Sand + Ozone for 100% safe drinking water" },
+  { icon: Truck, title: "Fast Doorstep Delivery", desc: "Reliable and timely water delivery across Secunderabad & Hyderabad" },
+  { icon: Award, title: "Quality Certified", desc: "FSSAI approved standards with daily quality & batch testing" },
+  { icon: Clock, title: "Flexible Scheduling", desc: "Daily, weekly, or event-based delivery to fit your routine" },
 ];
 
 const plans = [
-  { name: "Starter", price: "₹99", period: "/jar", desc: "For individuals & small families", features: ["20L Purified Jar", "Weekly delivery", "App tracking", "Quality reports"], popular: false },
-  { name: "Family", price: "₹399", period: "/week", desc: "Most popular for households", features: ["5 Jars per week", "Priority delivery", "Free jar sanitization", "Dedicated support"], popular: true },
-  { name: "Business", price: "₹1,499", period: "/week", desc: "For offices & institutions", features: ["20 Jars per week", "Daily delivery", "Bulk tanker option", "Custom SLA & billing"], popular: false },
+  { name: "20L Jar", price: "₹99", period: "/jar", desc: "Perfect for homes & offices", features: ["20L Purified Jar", "Next-day delivery", "Deep sanitized bottles", "Doorstep replacement"], popular: true },
+  { name: "15L Jar", price: "₹85", period: "/jar", desc: "Ideal for small families", features: ["15L Purified Jar", "Easy to handle", "Balanced minerals", "Priority delivery"], popular: false },
+  { name: "10L Bottle", price: "₹65", period: "/jar", desc: "Compact for individual use", features: ["10L Purified Bottle", "Travel friendly", "Same pure quality", "Individual use design"], popular: false },
 ];
 
 const Index = () => {
@@ -23,92 +23,148 @@ const Index = () => {
       <Navbar />
 
       {/* Hero */}
-      <section className="relative overflow-hidden pt-16">
+      <section className="relative overflow-hidden pt-20 pb-32">
         <div className="absolute inset-0 gradient-water opacity-5" />
-        <div className="container relative flex flex-col items-center gap-8 py-24 text-center lg:py-32">
-          <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm font-medium text-primary">
-            <Droplets className="h-4 w-4" />
-            Trusted by 1,500+ families in Hyderabad
+        <div className="container relative grid lg:grid-cols-2 gap-12 items-center">
+          <div className="flex flex-col items-start gap-8 py-16 text-left">
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm font-semibold text-primary">
+              <Droplets className="h-4 w-4" />
+              Trusted in Hyderabad Since 2016
+            </div>
+            <h1 className="max-w-xl font-heading text-5xl font-extrabold leading-[1.1] tracking-tight text-foreground sm:text-6xl">
+              Pure Water. <span className="text-gradient-water">Trusted Delivery.</span>
+            </h1>
+            <p className="max-w-lg text-xl text-muted-foreground leading-relaxed">
+              Premium quality RO purified mineral water delivered to your doorstep. Serving Parsigutta, Secunderabad, and across Hyderabad with 100% safety.
+            </p>
+            <div className="flex flex-wrap items-center gap-4">
+              <Button size="lg" className="h-14 px-8 text-lg rounded-xl shadow-water gap-2" asChild>
+                <Link to="/portal/order">
+                  Start Subscription <ArrowRight className="h-5 w-5" />
+                </Link>
+              </Button>
+              <Button size="lg" variant="outline" className="h-14 px-8 text-lg rounded-xl gap-2" asChild>
+                <Link to="/products">View Products</Link>
+              </Button>
+            </div>
+            <div className="flex items-center gap-6 pt-4">
+              <div className="flex -space-x-3">
+                {[1, 2, 3, 4].map(i => (
+                  <div key={i} className="h-10 w-10 rounded-full border-2 border-background bg-muted overflow-hidden">
+                    <img src={`https://i.pravatar.cc/100?img=${i + 10}`} alt="User" />
+                  </div>
+                ))}
+              </div>
+              <p className="text-sm font-medium text-muted-foreground">
+                Joined by <span className="text-foreground font-bold">1,500+</span> happy families
+              </p>
+            </div>
           </div>
-          <h1 className="max-w-4xl font-heading text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-            Pure Water, <span className="text-gradient-water">Delivered Fresh</span> to Your Door
-          </h1>
-          <p className="max-w-2xl text-lg text-muted-foreground">
-            7-stage purified drinking water with real-time quality monitoring. Subscribe for daily, weekly, or monthly delivery — residential, commercial, or institutional.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            <Button size="lg" className="gap-2 shadow-water" asChild>
-              <Link to="/portal/order">
-                Start Your Subscription <ArrowRight className="h-4 w-4" />
-              </Link>
-            </Button>
-            <Button size="lg" variant="outline" className="gap-2" asChild>
-              <a href="#pricing">View Plans</a>
-            </Button>
+          <div className="relative">
+            <div className="absolute -inset-4 bg-primary/20 blur-3xl rounded-full opacity-30 animate-pulse" />
+            <div className="relative bg-card rounded-[2.5rem] border border-border overflow-hidden shadow-water-lg">
+              <img
+                src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?q=80&w=2070&auto=format&fit=crop"
+                alt="Pure mineral water showcase"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute bottom-6 left-6 right-6 p-6 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 text-white">
+                <p className="text-sm font-medium opacity-80">Our Bestseller</p>
+                <h4 className="text-xl font-bold">20L Purified Mineral Jar</h4>
+                <div className="flex items-center gap-2 mt-2">
+                  <div className="flex text-yellow-400">
+                    {"★★★★★".split("").map((s, i) => <span key={i}>{s}</span>)}
+                  </div>
+                  <span className="text-sm font-semibold">4.4 / 5 Rating</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="mt-8 w-full max-w-5xl overflow-hidden rounded-2xl shadow-water-lg">
-            <img src={heroImage} alt="Crystal clear purified water" className="h-auto w-full object-cover" />
+        </div>
+      </section>
+
+      {/* Stats */}
+      <section className="bg-primary py-12 text-primary-foreground">
+        <div className="container overflow-hidden">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="text-center">
+              <h3 className="text-4xl font-bold font-heading mb-1 text-white">8+</h3>
+              <p className="text-primary-foreground/80 text-sm font-medium">Years Experience</p>
+            </div>
+            <div className="text-center">
+              <h3 className="text-4xl font-bold font-heading mb-1 text-white">1.5K+</h3>
+              <p className="text-primary-foreground/80 text-sm font-medium">Active Families</p>
+            </div>
+            <div className="text-center">
+              <h3 className="text-4xl font-bold font-heading mb-1 text-white">100%</h3>
+              <p className="text-primary-foreground/80 text-sm font-medium">Safe & Purified</p>
+            </div>
+            <div className="text-center">
+              <h3 className="text-4xl font-bold font-heading mb-1 text-white">24h</h3>
+              <p className="text-primary-foreground/80 text-sm font-medium">Fast Delivery</p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Features */}
-      <section id="features" className="border-t border-border bg-muted/30 py-20">
+      <section id="features" className="py-24 border-b border-border">
         <div className="container">
-          <div className="mb-12 text-center">
-            <h2 className="font-heading text-3xl font-bold text-foreground">Why Choose AquaPure?</h2>
-            <p className="mt-3 text-muted-foreground">Industry-leading purification with technology-driven delivery</p>
+          <div className="mb-16 text-center max-w-3xl mx-auto">
+            <h2 className="font-heading text-4xl font-bold text-foreground mb-4">Why Choose Shiva Ganga?</h2>
+            <p className="text-lg text-muted-foreground">We don't just supply water; we deliver health and trust with every jar.</p>
           </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {features.map((f) => (
-              <div key={f.title} className="rounded-xl border border-border bg-card p-6 transition-all hover:shadow-water">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
-                  <f.icon className="h-6 w-6 text-primary" />
+              <div key={f.title} className="group p-8 rounded-[2rem] border border-border bg-card transition-all hover:bg-primary/5 hover:border-primary/20 hover:shadow-water relative overflow-hidden">
+                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+                  <f.icon className="h-7 w-7" />
                 </div>
-                <h3 className="font-heading text-lg font-semibold text-card-foreground">{f.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.desc}</p>
+                <h3 className="font-heading text-xl font-bold text-card-foreground mb-3">{f.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{f.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Pricing */}
-      <section id="pricing" className="py-20">
+      {/* Pricing/Products */}
+      <section id="pricing" className="py-24 bg-muted/30">
         <div className="container">
-          <div className="mb-12 text-center">
-            <h2 className="font-heading text-3xl font-bold text-foreground">Simple, Transparent Pricing</h2>
-            <p className="mt-3 text-muted-foreground">No hidden charges. Cancel or modify anytime.</p>
+          <div className="mb-16 text-center max-w-2xl mx-auto">
+            <h2 className="font-heading text-4xl font-bold text-foreground mb-4">Our Best Plans</h2>
+            <p className="text-lg text-muted-foreground">Competitive prices for all bottle sizes making it accessible for every customer.</p>
           </div>
-          <div className="mx-auto grid max-w-4xl gap-6 lg:grid-cols-3">
+          <div className="grid max-w-6xl mx-auto gap-8 lg:grid-cols-3">
             {plans.map((plan) => (
               <div
                 key={plan.name}
-                className={`relative rounded-2xl border p-6 transition-all hover:shadow-water ${
-                  plan.popular ? "border-primary bg-primary/5 shadow-water" : "border-border bg-card"
-                }`}
+                className={`relative rounded-[2.5rem] border p-10 transition-all hover:scale-[1.02] ${plan.popular ? "border-primary bg-card shadow-water-lg ring-1 ring-primary/20" : "border-border bg-card"
+                  }`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-primary px-3 py-0.5 text-xs font-semibold text-primary-foreground">
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-primary px-6 py-1.5 text-xs font-bold text-primary-foreground shadow-lg uppercase tracking-wider">
                     Most Popular
                   </div>
                 )}
-                <h3 className="font-heading text-xl font-bold text-card-foreground">{plan.name}</h3>
-                <p className="mt-1 text-sm text-muted-foreground">{plan.desc}</p>
-                <div className="mt-4">
-                  <span className="font-heading text-3xl font-bold text-foreground">{plan.price}</span>
-                  <span className="text-muted-foreground">{plan.period}</span>
+                <h3 className="font-heading text-2xl font-bold text-foreground mb-2">{plan.name}</h3>
+                <p className="text-sm text-muted-foreground mb-6">{plan.desc}</p>
+                <div className="mb-8">
+                  <span className="font-heading text-5xl font-extrabold text-foreground">{plan.price}</span>
+                  <span className="text-muted-foreground font-medium ml-1">{plan.period}</span>
                 </div>
-                <ul className="mt-6 space-y-3">
+                <ul className="space-y-4 mb-10">
                   {plan.features.map((feat) => (
-                    <li key={feat} className="flex items-center gap-2 text-sm text-card-foreground">
-                      <CheckCircle2 className="h-4 w-4 shrink-0 text-success" />
+                    <li key={feat} className="flex items-center gap-3 text-sm font-medium text-foreground/80">
+                      <div className="h-5 w-5 rounded-full bg-success/10 flex items-center justify-center shrink-0">
+                        <CheckCircle2 className="h-3 w-3 text-success" />
+                      </div>
                       {feat}
                     </li>
                   ))}
                 </ul>
-                <Button className="mt-6 w-full" variant={plan.popular ? "default" : "outline"} asChild>
-                  <Link to="/portal/order">Get Started</Link>
+                <Button className="w-full h-14 rounded-xl text-lg font-bold shadow-water" variant={plan.popular ? "default" : "outline"} asChild>
+                  <Link to="/portal/order">Select Plan</Link>
                 </Button>
               </div>
             ))}
@@ -116,38 +172,31 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Quality */}
-      <section id="quality" className="border-t border-border bg-muted/30 py-20">
-        <div className="container text-center">
-          <h2 className="font-heading text-3xl font-bold text-foreground">Quality You Can Trust</h2>
-          <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
-            FSSAI certified, BIS ISI marked, and Pollution Control Board approved. Every batch tested for TDS, pH, turbidity, heavy metals, and microbial safety.
-          </p>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-8 text-sm font-semibold text-muted-foreground">
-            {["FSSAI Certified", "BIS ISI Mark", "WHO Standards", "ISO 22000", "24/7 IoT Monitoring"].map((cert) => (
-              <div key={cert} className="flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2">
-                <Shield className="h-4 w-4 text-primary" />
-                {cert}
-              </div>
-            ))}
+      {/* CTA */}
+      <section className="container py-24">
+        <div className="rounded-[3rem] gradient-water p-16 text-center text-primary-foreground shadow-water-lg relative overflow-hidden">
+          <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 h-96 w-96 rounded-full bg-white/10 blur-3xl" />
+          <div className="relative z-10 max-w-3xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-extrabold font-heading mb-8">Ready for healthy hydration?</h2>
+            <p className="text-xl mb-12 opacity-90 leading-relaxed">
+              Join thousands of families in Secunderabad who trust Shiva Ganga for their daily drinking water.
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-6">
+              <Button size="lg" variant="secondary" className="h-16 px-10 text-xl font-bold rounded-2xl" asChild>
+                <Link to="/portal/order">Order Your First Jar</Link>
+              </Button>
+              <a href="tel:09010465929" className="flex items-center gap-3 text-2xl font-bold text-white hover:opacity-80 transition-opacity">
+                <div className="h-12 w-12 rounded-full border-2 border-white/30 flex items-center justify-center">
+                  <Phone className="h-6 w-6" />
+                </div>
+                090104 65929
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-border bg-card py-12">
-        <div className="container flex flex-col items-center justify-between gap-6 sm:flex-row">
-          <div className="flex items-center gap-2">
-            <Droplets className="h-5 w-5 text-primary" />
-            <span className="font-heading text-lg font-bold text-foreground">AquaPure</span>
-          </div>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Phone className="h-4 w-4" />
-            +91 40-1234-5678 · support@aquapure.in
-          </div>
-          <p className="text-xs text-muted-foreground">© 2026 AquaPure Water Supply. All rights reserved.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
