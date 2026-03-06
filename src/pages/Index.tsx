@@ -24,8 +24,39 @@ const Index = () => {
 
       {/* Hero */}
       <section className="relative overflow-hidden pt-20 pb-32">
-        <div className="absolute inset-0 gradient-water opacity-5" />
-        <div className="container relative grid lg:grid-cols-2 gap-12 items-center">
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-blue-500/5 to-transparent z-0" />
+
+        {/* WAVE ANIMATION */}
+        <div className="absolute bottom-0 left-0 w-full h-24 overflow-hidden z-0 pointer-events-none opacity-40">
+          <div className="absolute bottom-0 w-[200%] h-full animate-wave">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="relative block h-full w-full">
+              <path d="M0,64L48,64C96,64,192,64,288,74.7C384,85,480,107,576,101.3C672,96,768,64,864,53.3C960,43,1056,53,1152,58.7L1200,64L1200,120L1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z" fill="hsl(var(--primary))"></path>
+            </svg>
+          </div>
+          <div className="absolute bottom-0 w-[200%] h-full animate-wave-slow opacity-50 -left-[100px]">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="relative block h-full w-full">
+              <path d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,74.7C672,53,768,43,864,64C960,85,1056,139,1152,144L1200,149.3L1200,120L1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z" fill="hsl(var(--primary))"></path>
+            </svg>
+          </div>
+        </div>
+
+        {/* FLOATING BUBBLES */}
+        {[...Array(6)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute rounded-full bg-primary/10 blur-sm animate-float pointer-events-none z-0"
+            style={{
+              width: `${Math.random() * 40 + 10}px`,
+              height: `${Math.random() * 40 + 10}px`,
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${Math.random() * 3 + 3}s`
+            }}
+          />
+        ))}
+
+        <div className="container relative grid lg:grid-cols-2 gap-12 items-center z-10">
           <div className="flex flex-col items-start gap-8 py-16 text-left">
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm font-semibold text-primary">
               <Droplets className="h-4 w-4" />
@@ -185,11 +216,11 @@ const Index = () => {
               <Button size="lg" variant="secondary" className="h-16 px-10 text-xl font-bold rounded-2xl" asChild>
                 <Link to="/portal/order">Order Your First Jar</Link>
               </Button>
-              <a href="tel:09010465929" className="flex items-center gap-3 text-2xl font-bold text-white hover:opacity-80 transition-opacity">
+              <a href="tel:9949218640" className="flex items-center gap-3 text-2xl font-bold text-white hover:opacity-80 transition-opacity">
                 <div className="h-12 w-12 rounded-full border-2 border-white/30 flex items-center justify-center">
                   <Phone className="h-6 w-6" />
                 </div>
-                090104 65929
+                91 99492 18640
               </a>
             </div>
           </div>

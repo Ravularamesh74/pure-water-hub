@@ -41,7 +41,7 @@ npm run dev
 
 ## Contact
 - **Address**: 11-3-362/1/B/1, Parsigutta, Secunderabad, TS – 500061
-- **Phone**: 090104 65929
+- **Phone**: 91 99492 18640
 - **Email**: info@shivaganga.com
 
 ---

@@ -12,37 +12,53 @@ import Quality from "./pages/Quality";
 import Contact from "./pages/Contact";
 import CustomerPortal from "./pages/CustomerPortal";
 import OrderPage from "./pages/OrderPage";
-import AdminDashboard from "./pages/admin/AdminDashboard";
-import AdminOrders from "./pages/admin/AdminOrders";
-import AdminCustomers from "./pages/admin/AdminCustomers";
-import AdminDeliveries from "./pages/admin/AdminDeliveries";
+import Register from "./pages/Register";
+import ForgotPassword from "./pages/ForgotPassword";
 import NotFound from "./pages/NotFound";
+import Welcome from "./pages/Login";
+import Unauthorized from "./pages/Unauthorized";
+import ProtectedRoute from "./components/ProtectedRoute";
+import { AuthProvider } from "./contexts/AuthContext";
+import FloatingOrderWidget from "./components/FloatingOrderWidget";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/delivery-areas" element={<DeliveryAreas />} />
-          <Route path="/quality" element={<Quality />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/portal" element={<CustomerPortal />} />
-          <Route path="/portal/order" element={<OrderPage />} />
-          <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/admin/orders" element={<AdminOrders />} />
-          <Route path="/admin/customers" element={<AdminCustomers />} />
-          <Route path="/admin/deliveries" element={<AdminDeliveries />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <AuthProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <FloatingOrderWidget />
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/delivery-areas" element={<DeliveryAreas />} />
+            <Route path="/quality" element={<Quality />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/login" element={<Welcome />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/forgot-passwordhub" element={<ForgotPassword />} />
+            <Route path="/unauthorized" element={<Unauthorized />} />
+
+            {/* Protected Routes for Auth Users */}
+            <Route path="/portal" element={<ProtectedRoute><CustomerPortal /></ProtectedRoute>} />
+            <Route
+              path="/portal/order"
+              element={
+                <ProtectedRoute>
+                  <OrderPage />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );

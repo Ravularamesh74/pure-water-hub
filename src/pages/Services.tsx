@@ -34,31 +34,51 @@ const Services = () => {
         <div className="min-h-screen bg-background">
             <Navbar />
 
-            <main className="pt-24 pb-16">
-                <header className="container text-center mb-16">
-                    <h1 className="text-4xl md:text-5xl font-bold font-heading mb-4 text-gradient-water">Our Services</h1>
-                    <p className="max-w-2xl mx-auto text-lg text-muted-foreground leading-relaxed">
-                        From individual households to large corporate institutions, we provide tailored water supply solutions across Hyderabad.
-                    </p>
-                </header>
+            <main className="pt-24 pb-20">
 
+                {/* HERO SECTION */}
+                <section className="relative overflow-hidden pt-12 pb-24 text-center">
+                    <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-blue-500/5 to-transparent z-0" />
+
+                    <div className="container relative z-10">
+                        <h1 className="text-4xl md:text-5xl font-bold font-heading mb-6 text-gradient-water">
+                            Our Professional Services
+                        </h1>
+                        <p className="max-w-2xl mx-auto text-lg text-muted-foreground leading-relaxed">
+                            From residential homes to corporate establishments, we provide
+                            consistent, pure, and healthy water supply solutions across Hyderabad.
+                        </p>
+                    </div>
+
+                    {/* WATER WAVE BACKGROUND */}
+                    <div className="absolute bottom-0 left-0 w-full h-16 overflow-hidden z-0 pointer-events-none opacity-20">
+                        <div className="absolute bottom-0 w-[200%] h-full animate-wave">
+                            <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="h-full w-full">
+                                <path d="M0,64L48,64C96,64,192,64,288,74.7C384,85,480,107,576,101.3C672,96,768,64,864,53.3C960,43,1056,53,1152,58.7L1200,64L1200,120L1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z" fill="hsl(var(--primary))" />
+                            </svg>
+                        </div>
+                    </div>
+                </section>
+
+                {/* SERVICES GRID */}
                 <section className="container mb-24">
                     <div className="grid md:grid-cols-2 gap-8">
                         {services.map((s) => (
-                            <div key={s.title} className="p-10 rounded-3xl border border-border bg-card hover:bg-primary/5 transition-all group">
-                                <div className="mb-8 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+                            <div key={s.title} className="p-10 rounded-3xl border bg-card hover:shadow-water-lg transition-all group overflow-hidden relative">
+                                <div className="mb-8 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
                                     <s.icon className="h-8 w-8" />
                                 </div>
-                                <h3 className="text-2xl font-bold font-heading mb-4 text-foreground">{s.title}</h3>
+                                <h3 className="text-2xl font-bold font-heading mb-4">{s.title}</h3>
                                 <p className="text-muted-foreground mb-8 text-lg leading-relaxed">{s.desc}</p>
-                                <ul className="grid sm:grid-cols-2 gap-3">
+                                <ul className="grid sm:grid-cols-2 gap-4 relative z-10">
                                     {s.features.map(f => (
-                                        <li key={f} className="flex items-center gap-2 text-sm text-foreground/80">
-                                            <CheckCircle2 className="h-4 w-4 text-success" />
+                                        <li key={f} className="flex items-center gap-2 text-sm font-medium">
+                                            <div className="h-2 w-2 rounded-full bg-primary/40 shrink-0" />
                                             {f}
                                         </li>
                                     ))}
                                 </ul>
+                                <div className="absolute -bottom-12 -right-12 h-40 w-40 gradient-water opacity-0 group-hover:opacity-5 rounded-full transition-opacity duration-700" />
                             </div>
                         ))}
                     </div>

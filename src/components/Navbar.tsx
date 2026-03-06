@@ -1,74 +1,206 @@
-import { Droplets, Menu, X } from "lucide-react";
+import {
+  Droplets,
+  Menu,
+  X,
+  User,
+  LogOut,
+  LayoutDashboard
+} from "lucide-react";
+
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useAuth } from "@/contexts/AuthContext";
+import { cn } from "@/lib/utils";
+
+const navLinks = [
+  { label: "About", path: "/about" },
+  { label: "Products", path: "/products" },
+  { label: "Services", path: "/services" },
+  { label: "Delivery Areas", path: "/delivery-areas" },
+  { label: "Quality", path: "/quality" },
+  { label: "Contact", path: "/contact" },
+];
 
 const Navbar = () => {
+  const { isAuthenticated, logout } = useAuth();
   const location = useLocation();
+
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
   const isLanding = location.pathname === "/";
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
+    <nav
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        scrolled
+          ? "bg-background/95 backdrop-blur-xl shadow-md border-b border-border/60"
+          : "bg-background/80 backdrop-blur-xl border-b border-border/50"
+      )}
+    >
       <div className="container flex h-16 items-center justify-between">
-        <Link to="/" className="flex items-center gap-2">
+
+        {/* LOGO */}
+        <Link to="/" className="flex items-center gap-3">
+
           <div className="flex h-10 w-10 items-center justify-center rounded-xl gradient-water">
             <Droplets className="h-6 w-6 text-primary-foreground" />
           </div>
-          <span className="font-heading text-xl font-bold text-gradient-water">Shiva Ganga</span>
+
+          <span className="font-heading text-xl font-bold text-gradient-water">
+            Shiva Ganga
+          </span>
+
         </Link>
 
-        {isLanding && (
-          <>
-            <div className="hidden items-center gap-6 lg:flex">
-              <Link to="/about" className="text-sm font-semibold text-muted-foreground transition-colors hover:text-primary">About</Link>
-              <Link to="/products" className="text-sm font-semibold text-muted-foreground transition-colors hover:text-primary">Products</Link>
-              <Link to="/services" className="text-sm font-semibold text-muted-foreground transition-colors hover:text-primary">Services</Link>
-              <Link to="/delivery-areas" className="text-sm font-semibold text-muted-foreground transition-colors hover:text-primary">Delivery Areas</Link>
-              <Link to="/quality" className="text-sm font-semibold text-muted-foreground transition-colors hover:text-primary">Quality Control</Link>
-              <Link to="/contact" className="text-sm font-semibold text-muted-foreground transition-colors hover:text-primary">Contact</Link>
-            </div>
-            <div className="hidden items-center gap-3 md:flex">
-              <Button variant="ghost" asChild><Link to="/portal">My Account</Link></Button>
-              <Button asChild className="rounded-xl shadow-water"><Link to="/portal/order">Order Now</Link></Button>
-            </div>
-            <button className="lg:hidden" onClick={() => setMobileOpen(!mobileOpen)}>
-              {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
-          </>
-        )}
+        {/* DESKTOP NAV */}
+        <div className="hidden lg:flex items-center gap-8">
 
-        {!isLanding && (
-          <div className="flex items-center gap-4">
-            <div className="hidden items-center gap-6 lg:flex mr-6">
-              <Link to="/about" className="text-sm font-semibold text-muted-foreground transition-colors hover:text-primary">About</Link>
-              <Link to="/products" className="text-sm font-semibold text-muted-foreground transition-colors hover:text-primary">Products</Link>
-              <Link to="/services" className="text-sm font-semibold text-muted-foreground transition-colors hover:text-primary">Services</Link>
-            </div>
-            <Button variant="ghost" asChild><Link to="/">Home</Link></Button>
-            <Button variant="ghost" asChild><Link to="/portal">Dashboard</Link></Button>
-            <Button variant="outline" asChild className="rounded-xl"><Link to="/admin">Admin</Link></Button>
-          </div>
-        )}
+          {navLinks.map((link) => {
+            const active = location.pathname === link.path;
+
+            return (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={cn(
+                  "text-sm font-semibold transition-colors",
+                  active
+                    ? "text-primary"
+                    : "text-muted-foreground hover:text-primary"
+                )}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+
+        </div>
+
+        {/* ACTIONS */}
+        <div className="hidden md:flex items-center gap-3">
+
+          {isAuthenticated ? (
+            <>
+              <Button variant="ghost" asChild>
+                <Link to="/portal">
+                  <User className="mr-2 h-4 w-4" />
+                  My Portal
+                </Link>
+              </Button>
+
+              <Button variant="destructive" onClick={() => {
+                logout();
+                window.location.href = "/";
+              }}>
+                <LogOut className="mr-2 h-4 w-4" />
+                Logout
+              </Button>
+            </>
+          ) : (
+            <Button variant="ghost" asChild>
+              <Link to="/login">
+                <User className="mr-2 h-4 w-4" />
+                Login
+              </Link>
+            </Button>
+          )}
+
+          <Button className="rounded-xl shadow-water" asChild>
+            <Link to="/portal/order">
+              Order Water
+            </Link>
+          </Button>
+
+        </div>
+
+        {/* MOBILE BUTTON */}
+        <button
+          className="lg:hidden"
+          onClick={() => setMobileOpen(!mobileOpen)}
+        >
+          {mobileOpen ? (
+            <X className="h-6 w-6" />
+          ) : (
+            <Menu className="h-6 w-6" />
+          )}
+        </button>
+
       </div>
 
+      {/* MOBILE MENU */}
+
       {mobileOpen && (
-        <div className="border-t border-border bg-background/95 backdrop-blur-xl p-8 lg:hidden animate-in slide-in-from-top duration-300">
-          <div className="flex flex-col gap-6">
-            <Link to="/about" className="text-lg font-bold" onClick={() => setMobileOpen(false)}>About Us</Link>
-            <Link to="/products" className="text-lg font-bold" onClick={() => setMobileOpen(false)}>Our Products</Link>
-            <Link to="/services" className="text-lg font-bold" onClick={() => setMobileOpen(false)}>Services</Link>
-            <Link to="/delivery-areas" className="text-lg font-bold" onClick={() => setMobileOpen(false)}>Delivery Areas</Link>
-            <Link to="/quality" className="text-lg font-bold" onClick={() => setMobileOpen(false)}>Quality Control</Link>
-            <Link to="/contact" className="text-lg font-bold" onClick={() => setMobileOpen(false)}>Contact</Link>
-            <hr className="border-border" />
-            <div className="grid grid-cols-2 gap-4">
-              <Button variant="outline" asChild onClick={() => setMobileOpen(false)} className="rounded-xl"><Link to="/portal">Login</Link></Button>
-              <Button asChild onClick={() => setMobileOpen(false)} className="rounded-xl shadow-water"><Link to="/portal/order">Order Now</Link></Button>
-            </div>
+        <div className="lg:hidden border-t border-border/50 bg-background animate-in slide-in-from-top duration-300">
+
+          <div className="container py-6 flex flex-col gap-4">
+
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className="text-lg font-semibold"
+                onClick={() => setMobileOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ))}
+
+            <hr className="border-border/50 my-2" />
+
+            {isAuthenticated ? (
+              <>
+                <Button variant="ghost" asChild onClick={() => setMobileOpen(false)}>
+                  <Link to="/portal">
+                    My Portal
+                  </Link>
+                </Button>
+
+                <Button
+                  variant="destructive"
+                  onClick={() => {
+                    logout();
+                    setMobileOpen(false);
+                    window.location.href = "/";
+                  }}
+                >
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <Button variant="ghost" asChild>
+                <Link to="/login">
+                  Login
+                </Link>
+              </Button>
+            )}
+
+            <Button
+              className="w-full rounded-xl"
+              asChild
+              onClick={() => setMobileOpen(false)}
+            >
+              <Link to="/portal/order">
+                Order Water
+              </Link>
+            </Button>
+
           </div>
+
         </div>
       )}
+
     </nav>
   );
 };
