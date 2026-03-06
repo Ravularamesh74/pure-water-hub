@@ -12,9 +12,9 @@ const features = [
 ];
 
 const plans = [
-  { name: "20L Jar", price: "₹99", period: "/jar", desc: "Perfect for homes & offices", features: ["20L Purified Jar", "Next-day delivery", "Deep sanitized bottles", "Doorstep replacement"], popular: true },
-  { name: "15L Jar", price: "₹85", period: "/jar", desc: "Ideal for small families", features: ["15L Purified Jar", "Easy to handle", "Balanced minerals", "Priority delivery"], popular: false },
-  { name: "10L Bottle", price: "₹65", period: "/jar", desc: "Compact for individual use", features: ["10L Purified Bottle", "Travel friendly", "Same pure quality", "Individual use design"], popular: false },
+  { name: "20L Jar", price: "₹40", period: "/jar", desc: "Perfect for homes & offices", features: ["20L Purified Jar", "Next-day delivery", "Deep sanitized bottles", "Doorstep replacement"], popular: true },
+  { name: "15L Jar", price: "₹30", period: "/jar", desc: "Ideal for small families", features: ["15L Purified Jar", "Easy to handle", "Balanced minerals", "Priority delivery"], popular: false },
+  { name: "10L Bottle", price: "₹20", period: "/jar", desc: "Compact for individual use", features: ["10L Purified Bottle", "Travel friendly", "Same pure quality", "Individual use design"], popular: false },
 ];
 
 const Index = () => {
